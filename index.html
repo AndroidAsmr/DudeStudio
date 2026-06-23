@@ -237,95 +237,244 @@ h1.name{
 }
 .chip:hover{border-color:var(--pink-soft);background:var(--surface-strong);transform:translateY(-2px)}
 
-/* ========== STUDIO CARD ========== */
+/* ========== STUDIO CARD — REDESIGNED ========== */
 .studio-card{
-  width:100%;display:flex;align-items:center;gap:14px;
-  padding:clamp(14px,4vw,18px);border-radius:var(--radius-md);
-  border:1px solid var(--pink-soft);
-  background:linear-gradient(135deg,rgba(255,45,120,0.10),rgba(232,184,92,0.05));
-  color:var(--text);
+  width:100%;
+  border-radius:var(--radius-md);
+  border:1px solid rgba(255,45,120,0.2);
+  overflow:hidden;
+  position:relative;
 }
-.studio-logo{
-  width:46px;height:46px;min-width:46px;border-radius:14px;
-  overflow:hidden;background:linear-gradient(135deg,var(--pink),var(--gold));
+.studio-card-inner{
+  position:relative;
+  padding:clamp(18px,4.5vw,24px);
+  background:linear-gradient(135deg,rgba(255,45,120,0.10) 0%,rgba(232,184,92,0.06) 50%,rgba(255,255,255,0.02) 100%);
+  display:flex;flex-direction:column;gap:16px;
+  overflow:hidden;
+}
+.studio-card-inner::before{
+  content:"";
+  position:absolute;top:-60px;right:-60px;
+  width:180px;height:180px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,45,120,0.18),transparent 70%);
+  pointer-events:none;
+}
+.studio-card-inner::after{
+  content:"";
+  position:absolute;bottom:-40px;left:-40px;
+  width:120px;height:120px;border-radius:50%;
+  background:radial-gradient(circle,rgba(232,184,92,0.10),transparent 70%);
+  pointer-events:none;
+}
+.studio-card-top{display:flex;align-items:center;gap:14px}
+.studio-logo-new{
+  position:relative;
+  width:52px;height:52px;min-width:52px;
+  border-radius:16px;overflow:hidden;
+  background:linear-gradient(135deg,var(--pink),var(--gold));
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 8px 20px -6px rgba(255,45,120,0.4);
+}
+.studio-logo-new img{width:100%;height:100%;object-fit:cover;display:block}
+.studio-logo-new .fallback-text{
+  font-family:'Space Grotesk',sans-serif;font-weight:800;
+  font-size:15px;letter-spacing:0.5px;color:#0b0a0d;
+}
+.studio-logo-new .verified-dot{
+  position:absolute;bottom:-2px;right:-2px;
+  width:16px;height:16px;border-radius:50%;
+  background:linear-gradient(135deg,var(--pink),var(--gold));
+  border:2px solid var(--bg);
   display:flex;align-items:center;justify-content:center;
 }
-.studio-logo img{width:100%;height:100%;object-fit:cover;display:block}
-.studio-logo-fallback{
-  font-family:'Space Grotesk',sans-serif;font-weight:700;
-  font-size:14px;letter-spacing:0.5px;color:#0b0a0d;
+.studio-logo-new .verified-dot svg{width:8px;height:8px}
+.studio-head{flex:1;min-width:0}
+.studio-head h3{
+  font-size:clamp(14px,3.8vw,16px);font-weight:800;
+  margin-bottom:3px;letter-spacing:-0.2px;
 }
-.studio-card .studio-text{flex:1;min-width:0}
-.studio-card h3{font-size:clamp(13px,3.5vw,14.5px);font-weight:700;margin-bottom:4px}
-.studio-card p{font-size:clamp(10.5px,2.8vw,11.8px);color:var(--muted);line-height:1.75}
+.studio-head .studio-tag{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(10px,2.5vw,11px);font-weight:600;
+  letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--gold);opacity:0.85;
+}
+.studio-divider{
+  height:1px;
+  background:linear-gradient(90deg,rgba(255,45,120,0.3),transparent);
+}
+.studio-desc{
+  font-size:clamp(11.5px,3vw,12.5px);line-height:1.85;color:var(--muted);
+}
+.studio-stats-row{
+  display:flex;gap:0;
+  background:rgba(255,255,255,0.04);
+  border-radius:12px;overflow:hidden;
+  border:1px solid rgba(255,255,255,0.07);
+}
+.studio-stat-item{
+  flex:1;text-align:center;
+  padding:10px 6px;position:relative;
+}
+.studio-stat-item:not(:last-child)::after{
+  content:"";position:absolute;top:20%;bottom:20%;left:0;
+  width:1px;background:rgba(255,255,255,0.07);
+}
+.studio-stat-item b{
+  display:block;font-size:clamp(13px,3.5vw,15px);font-weight:800;
+  background:linear-gradient(135deg,#fff,var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.studio-stat-item span{
+  font-size:clamp(9px,2.2vw,10px);color:var(--muted);margin-top:2px;display:block;
+}
 
-/* ========== CONNECT BUTTONS ========== */
-.connect-grid{width:100%;display:flex;flex-direction:column;gap:10px}
-.connect-row{display:flex;gap:10px;width:100%}
-.connect-btn{
-  display:inline-flex;align-items:center;justify-content:center;
-  gap:8px;padding:clamp(9px,2.5vw,11px) clamp(14px,4vw,18px);
-  border-radius:var(--radius-pill);
-  background:var(--surface);border:1px solid var(--border);
-  backdrop-filter:blur(14px);color:var(--text);text-decoration:none;
-  font-size:clamp(11.5px,3vw,13px);font-weight:600;
-  transition:transform .22s ease,border-color .22s ease,background .22s ease,box-shadow .22s ease;
-  white-space:nowrap;
+/* ========== CONNECT — ICON GRID ========== */
+.social-grid{
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
 }
-.connect-btn:hover{
-  transform:translateY(-2px);border-color:var(--pink-soft);
-  background:var(--surface-strong);
-  box-shadow:0 8px 20px -10px rgba(255,45,120,0.4);
+.soc{
+  flex:1;
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  text-decoration:none;color:var(--text);
 }
-.connect-btn:active{transform:scale(.97)}
-.connect-btn .icon svg{width:16px;height:16px;display:block}
-.connect-btn.full{width:100%}
-.connect-btn.accent{
-  background:linear-gradient(95deg,var(--pink),#ff5a8f);
-  border-color:transparent;color:#fff;
+.soc-box{
+  width:100%;aspect-ratio:1/1;
+  border-radius:16px;
+  border:1px solid var(--border);
+  background:var(--surface);
+  display:flex;align-items:center;justify-content:center;
+  transition:transform .22s cubic-bezier(.34,1.3,.64,1),box-shadow .22s ease,border-color .22s ease,background .22s ease;
 }
-.connect-btn.accent:hover{box-shadow:0 12px 24px -10px rgba(255,45,120,0.55)}
-.connect-btn.half{flex:1}
+.soc:hover .soc-box{transform:translateY(-4px) scale(1.04)}
+.soc:active .soc-box{transform:scale(.92)}
+.soc-box svg,.soc-box img{width:clamp(22px,6vw,26px);height:clamp(22px,6vw,26px);display:block}
+.soc-label{
+  font-size:clamp(10px,2.6vw,11.5px);font-weight:600;
+  color:var(--muted);text-align:center;
+}
 
-/* ========== PORTFOLIO ========== */
-.portfolio{width:100%;display:flex;flex-direction:column;gap:14px}
+/* brand accent boxes */
+.soc.ig .soc-box{background:linear-gradient(135deg,rgba(255,45,120,0.18),rgba(232,184,92,0.08));border-color:rgba(255,45,120,0.28)}
+.soc.ig:hover .soc-box{box-shadow:0 10px 24px -8px rgba(255,45,120,0.35);border-color:rgba(255,45,120,0.5)}
+.soc.yt .soc-box{background:rgba(255,48,48,0.1);border-color:rgba(255,48,48,0.2)}
+.soc.yt:hover .soc-box{box-shadow:0 10px 24px -8px rgba(255,48,48,0.25);border-color:rgba(255,48,48,0.4)}
+.soc.tg .soc-box{background:rgba(38,167,222,0.1);border-color:rgba(38,167,222,0.2)}
+.soc.tg:hover .soc-box{box-shadow:0 10px 24px -8px rgba(38,167,222,0.25);border-color:rgba(38,167,222,0.4)}
+.soc.wa .soc-box{background:rgba(37,211,102,0.1);border-color:rgba(37,211,102,0.2)}
+.soc.wa:hover .soc-box{box-shadow:0 10px 24px -8px rgba(37,211,102,0.25);border-color:rgba(37,211,102,0.4)}
+.soc.web .soc-box{background:rgba(232,184,92,0.1);border-color:rgba(232,184,92,0.2)}
+.soc.web:hover .soc-box{box-shadow:0 10px 24px -8px rgba(232,184,92,0.25);border-color:rgba(232,184,92,0.4)}
+.soc.em .soc-box{background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1)}
+.soc.em:hover .soc-box{box-shadow:0 10px 24px -8px rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.18)}
+
+/* ========== PORTFOLIO — REDESIGNED ========== */
+.portfolio{width:100%;display:flex;flex-direction:column;gap:20px}
+
+/* Portfolio Header */
+.portfolio-header{
+  width:100%;position:relative;
+  display:flex;flex-direction:column;gap:6px;
+}
+.portfolio-eyebrow{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(10px,2.5vw,11px);font-weight:600;
+  letter-spacing:3px;text-transform:uppercase;
+  color:var(--pink);opacity:0.9;
+}
+.portfolio-title{
+  font-size:clamp(20px,5.5vw,26px);font-weight:900;
+  letter-spacing:-0.5px;line-height:1.15;
+}
+.portfolio-title .highlight{
+  background:linear-gradient(95deg,var(--pink),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.portfolio-subtitle{
+  font-size:clamp(11px,3vw,12.5px);color:var(--muted);line-height:1.75;margin-top:2px;
+}
+.portfolio-header-line{
+  width:40px;height:3px;border-radius:2px;
+  background:linear-gradient(90deg,var(--pink),var(--gold));
+  margin-top:4px;
+}
+
+/* Portfolio Grid */
 .portfolio-grid{
   width:100%;display:grid;
-  grid-template-columns:repeat(2,1fr);gap:clamp(8px,2.5vw,12px);
+  grid-template-columns:repeat(2,1fr);gap:clamp(8px,2.5vw,10px);
 }
 .work-card{
   position:relative;border-radius:var(--radius-md);overflow:hidden;
   border:1px solid var(--border);
-  background:
-    linear-gradient(160deg,rgba(255,45,120,0.22),rgba(232,184,92,0.10) 60%,rgba(255,255,255,0.02)),
-    var(--bg-soft);
-  transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease;
+  background:var(--bg-soft);
+  transition:transform .32s cubic-bezier(.34,1.2,.64,1),border-color .3s ease,box-shadow .3s ease;
   display:flex;flex-direction:column;
+  cursor:pointer;
 }
 .work-card:hover{
-  transform:translateY(-5px);
-  border-color:var(--pink-soft);
-  box-shadow:0 16px 32px -16px rgba(255,45,120,0.35);
+  transform:translateY(-6px) scale(1.01);
+  border-color:rgba(255,45,120,0.4);
+  box-shadow:0 20px 40px -16px rgba(255,45,120,0.3);
 }
-.work-card .thumb{position:relative;aspect-ratio:4/5;overflow:hidden}
+.work-card .thumb{
+  position:relative;aspect-ratio:4/5;overflow:hidden;
+  background:var(--bg-soft);
+}
 .work-card .thumb img{
   width:100%;height:100%;object-fit:cover;display:block;
-  transition:transform .4s ease;
+  transition:transform .45s ease;
 }
-.work-card:hover .thumb img{transform:scale(1.06)}
+.work-card:hover .thumb img{transform:scale(1.08)}
+
+/* Overlay gradient on thumb */
+.work-card .thumb::after{
+  content:"";
+  position:absolute;inset:0;
+  background:linear-gradient(
+    to bottom,
+    transparent 40%,
+    rgba(11,10,13,0.7) 80%,
+    rgba(11,10,13,0.92) 100%
+  );
+  pointer-events:none;
+}
+
+/* Category tag */
+.work-card .cat-tag{
+  position:absolute;top:9px;right:9px;z-index:2;
+  font-family:'Space Grotesk',sans-serif;
+  font-size:9px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;
+  padding:3px 8px;border-radius:20px;
+  background:rgba(11,10,13,0.65);backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,0.1);
+  color:rgba(245,241,234,0.8);
+}
+
+/* Card bottom info */
+.work-card .card-info{
+  padding:clamp(8px,2.5vw,11px) clamp(9px,2.5vw,12px) clamp(10px,2.5vw,13px);
+  display:flex;flex-direction:column;gap:4px;
+  background:var(--bg-soft);
+}
+.work-card .label{
+  font-size:clamp(12px,3.2vw,13.5px);font-weight:800;color:var(--text);
+  letter-spacing:-0.1px;
+}
+.work-card .desc{
+  font-size:clamp(9.5px,2.5vw,10.5px);line-height:1.6;color:var(--muted);
+}
+
+/* Placeholder when no image */
 .work-card .placeholder-mark{
   position:absolute;inset:0;
   display:none;align-items:center;justify-content:center;
+  background:linear-gradient(160deg,rgba(255,45,120,0.12),rgba(232,184,92,0.06));
 }
-.work-card .placeholder-mark svg{width:26px;height:26px;opacity:.4}
-.work-card .label{
-  padding:8px clamp(9px,2.5vw,12px) 3px;
-  font-size:clamp(11.5px,3vw,12.5px);font-weight:700;color:var(--text);
-}
-.work-card .desc{
-  padding:0 clamp(9px,2.5vw,12px) clamp(8px,2vw,11px);
-  font-size:clamp(9.5px,2.5vw,11px);line-height:1.65;color:var(--muted);
-}
+.work-card .placeholder-mark svg{width:26px;height:26px;opacity:.3}
 
 /* ========== CTA ========== */
 .cta-card{
@@ -383,7 +532,6 @@ footer .made{font-size:10.5px;color:rgba(154,150,160,0.4);margin-top:4px}
 }
 .reveal.in{opacity:1;transform:translateY(0)}
 
-/* stagger children inside reveal */
 .chip-row .chip{
   opacity:0;transform:translateY(10px) scale(.95);
   transition:opacity .5s ease,transform .5s ease;
@@ -398,14 +546,16 @@ footer .made{font-size:10.5px;color:rgba(154,150,160,0.4);margin-top:4px}
 
 .portfolio-grid .work-card{
   opacity:0;transform:translateY(24px) scale(.97);
-  transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1),box-shadow .3s ease,border-color .3s ease;
+  transition:opacity .55s cubic-bezier(.16,1,.3,1),transform .55s cubic-bezier(.16,1,.3,1),box-shadow .3s ease,border-color .3s ease;
 }
-.portfolio-grid.stagger-in .work-card:nth-child(1){transition-delay:.05s}
-.portfolio-grid.stagger-in .work-card:nth-child(2){transition-delay:.12s}
-.portfolio-grid.stagger-in .work-card:nth-child(3){transition-delay:.19s}
-.portfolio-grid.stagger-in .work-card:nth-child(4){transition-delay:.26s}
-.portfolio-grid.stagger-in .work-card:nth-child(5){transition-delay:.33s}
-.portfolio-grid.stagger-in .work-card:nth-child(6){transition-delay:.40s}
+.portfolio-grid.stagger-in .work-card:nth-child(1){transition-delay:.04s}
+.portfolio-grid.stagger-in .work-card:nth-child(2){transition-delay:.09s}
+.portfolio-grid.stagger-in .work-card:nth-child(3){transition-delay:.14s}
+.portfolio-grid.stagger-in .work-card:nth-child(4){transition-delay:.19s}
+.portfolio-grid.stagger-in .work-card:nth-child(5){transition-delay:.24s}
+.portfolio-grid.stagger-in .work-card:nth-child(6){transition-delay:.29s}
+.portfolio-grid.stagger-in .work-card:nth-child(7){transition-delay:.34s}
+.portfolio-grid.stagger-in .work-card:nth-child(8){transition-delay:.38s}
 .portfolio-grid.stagger-in .work-card{opacity:1;transform:translateY(0) scale(1)}
 
 .stats{
@@ -421,8 +571,6 @@ footer .made{font-size:10.5px;color:rgba(154,150,160,0.4);margin-top:4px}
   *{animation:none!important;transition:none!important}
   .chip-row .chip,.portfolio-grid .work-card{opacity:1!important;transform:none!important}
 }
-
-/* ========== VERY SMALL SCREENS ========== */
 @media(max-width:340px){
   .connect-row{flex-direction:column}
   .connect-btn.half{flex:unset;width:100%}
@@ -491,245 +639,372 @@ footer .made{font-size:10.5px;color:rgba(154,150,160,0.4);margin-top:4px}
     </div>
   </section>
 
-  <!-- STUDIO CARD -->
+  <!-- STUDIO CARD — REDESIGNED -->
   <div class="studio-card reveal">
-    <div class="studio-logo" id="studio-logo-wrap">
-      <img src="https://4edit.ir/favicon.ico" alt="DUDE STUDIO"
-           onerror="this.style.display='none';document.getElementById('studio-logo-wrap').innerHTML='<span class=studio-logo-fallback>DS</span>'">
-    </div>
-    <div class="studio-text">
-      <h3>بخشی از یه تیم بزرگ‌تریم</h3>
-      <p>DUDE STUDIO؛ استودیوی تولید محتوا و آموزش تدوین حرفه‌ای — جایی که کنار هم برای برندها داستان می‌سازیم.</p>
+    <div class="studio-card-inner">
+      <div class="studio-card-top">
+        <div class="studio-logo-new" id="studio-logo-wrap">
+          <img src="https://4edit.ir/favicon.ico" alt="DUDE STUDIO"
+               onerror="this.style.display='none';document.querySelector('.fallback-text').style.display='block'">
+          <span class="fallback-text" style="display:none">DS</span>
+          <div class="verified-dot">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#0b0a0d" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>
+          </div>
+        </div>
+        <div class="studio-head">
+          <div class="studio-tag">DUDE STUDIO</div>
+          <h3>بخشی از یه تیم بزرگ‌تریم</h3>
+        </div>
+      </div>
+      <div class="studio-divider"></div>
+      <p class="studio-desc">استودیوی تولید محتوا و آموزش تدوین حرفه‌ای — جایی که کنار هم برای برندها داستان می‌سازیم و مرز بین خلاقیت و نتیجه رو جا‌به‌جا می‌کنیم.</p>
+      <div class="studio-stats-row">
+        <div class="studio-stat-item"><b>۴edit</b><span>پلتفرم</span></div>
+        <div class="studio-stat-item"><b>۱۰۰+</b><span>پروژه</span></div>
+        <div class="studio-stat-item"><b>Pro</b><span>کیفیت</span></div>
+      </div>
     </div>
   </div>
 
   <!-- CONNECT -->
   <section class="reveal" style="width:100%;display:flex;flex-direction:column;gap:16px">
     <span class="section-label">راه‌های ارتباطی</span>
-    <div class="connect-grid">
-      <a class="connect-btn accent full" href="https://www.instagram.com/lhadirahimil/" target="_blank" rel="noopener">
-        <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="#fff" stroke="none"/></svg></span>
-        اینستاگرام
+    <div class="social-grid">
+
+      <a class="soc ig" href="https://www.instagram.com/lhadirahimil/" target="_blank" rel="noopener">
+        <div class="soc-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="var(--pink)" stroke="none"/></svg>
+        </div>
+        <span class="soc-label">اینستاگرام</span>
       </a>
-      <div class="connect-row">
-        <a class="connect-btn half" href="https://www.youtube.com/@DudeTrendEdit" target="_blank" rel="noopener">
-          <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 8.5s-.2-1.6-.9-2.3c-.8-.9-1.7-.9-2.2-1C15.6 5 12 5 12 5h0s-3.6 0-6.9.2c-.5 0-1.4.1-2.2 1C2.2 6.9 2 8.5 2 8.5S1.8 10.4 1.8 12.3v1.8c0 1.9.2 3.8.2 3.8s.2 1.6.9 2.3c.8.9 1.9.9 2.4 1 1.7.2 7.3.2 7.3.2s3.6 0 6.9-.2c.5-.1 1.4-.1 2.2-1 .7-.7.9-2.3.9-2.3s.2-1.9.2-3.8v-1.8c0-1.9-.2-3.8-.2-3.8Z"/><path d="M9.8 15.3 15.3 12 9.8 8.7Z" fill="currentColor" stroke="none"/></svg></span>
-          یوتیوب
-        </a>
-        <a class="connect-btn half" href="https://t.me/lhadirahimil" target="_blank" rel="noopener">
-          <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21 4-19 7.5 6.2 2.1M21 4 16.7 20l-6.2-6.4M21 4 8.5 13.6"/></svg></span>
-          تلگرام
-        </a>
-      </div>
-      <div class="connect-row">
-        <a class="connect-btn half" href="https://wa.me/989337589714" target="_blank" rel="noopener">
-          <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3.5 20.5 5 16.3A8.5 8.5 0 1 1 8.6 19l-5.1 1.5Z"/><path d="M8.7 8.6c.2-.5.4-.5.7-.5h.5c.2 0 .4 0 .6.5.2.5.7 1.7.7 1.9.1.1.1.3 0 .5-.1.2-.2.3-.3.4-.1.2-.3.3-.4.5-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.7-.1.2-.2.7-.8.9-1.1.2-.3.4-.2.6-.1.2.1 1.6.7 1.8.9.2.1.4.2.4.3.1.4.1.8-.1 1.2-.2.5-1.2 1.1-1.8 1.2-.5.1-1 .2-3.2-.7-2.7-1.1-4.5-3.8-4.6-4-.1-.2-1-1.3-1-2.6.1-1.2.7-1.8.9-2.1Z" fill="currentColor" stroke="none"/></svg></span>
-          واتساپ
-        </a>
-        <a class="connect-btn half" href="https://4edit.ir" target="_blank" rel="noopener">
-          <span class="icon" id="site-icon-wrap">
-            <img src="https://4edit.ir/favicon.ico" alt="" width="16" height="16" style="border-radius:3px;display:block"
-                 onerror="this.replaceWith(document.createTextNode('🎬'))">
-          </span>
-          4edit.ir
-        </a>
-      </div>
-      <a class="connect-btn full" href="mailto:lhadirahimil@gmail.com">
-        <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></svg></span>
-        lhadirahimil@gmail.com
+
+      <a class="soc yt" href="https://www.youtube.com/@DudeTrendEdit" target="_blank" rel="noopener">
+        <div class="soc-box">
+          <svg viewBox="0 0 24 24" fill="#ff4444" stroke="none"><path d="M22 8.5s-.2-1.6-.9-2.3c-.8-.9-1.7-.9-2.2-1C15.6 5 12 5 12 5s-3.6 0-6.9.2c-.5 0-1.4.1-2.2 1C2.2 6.9 2 8.5 2 8.5S1.8 10.4 1.8 12.3v1.8c0 1.9.2 3.8.2 3.8s.2 1.6.9 2.3c.8.9 1.9.9 2.4 1 1.7.2 7.3.2 7.3.2s3.6 0 6.9-.2c.5-.1 1.4-.1 2.2-1 .7-.7.9-2.3.9-2.3s.2-1.9.2-3.8v-1.8c0-1.9-.2-3.8-.2-3.8Z"/><path d="M9.8 15.3 15.3 12 9.8 8.7Z" fill="#fff"/></svg>
+        </div>
+        <span class="soc-label">یوتیوب</span>
       </a>
+
+      <a class="soc tg" href="https://t.me/lhadirahimil" target="_blank" rel="noopener">
+        <div class="soc-box">
+          <svg viewBox="0 0 24 24" fill="#26a7de" stroke="none"><path d="M21.2 4.3 2.4 11.6c-1.3.5-1.3 1.3-.2 1.6l4.8 1.5 11-7c.5-.3 1-.1.6.3L9 16.2l-.4 5c.5 0 .8-.2 1.1-.5l2.6-2.5 4.9 3.6c.9.5 1.5.2 1.8-.8L22.9 5.4c.4-1.4-.5-2-1.7-1.1Z"/></svg>
+        </div>
+        <span class="soc-label">تلگرام</span>
+      </a>
+
+      <a class="soc wa" href="https://wa.me/989337589714" target="_blank" rel="noopener">
+        <div class="soc-box">
+          <svg viewBox="0 0 24 24" fill="#25d366" stroke="none"><path d="M3.5 20.5 5 16.3A8.5 8.5 0 1 1 8.6 19l-5.1 1.5Z"/><path d="M8.7 8.6c.2-.5.4-.5.7-.5h.5c.2 0 .4 0 .6.5.2.5.7 1.7.7 1.9.1.1.1.3 0 .5-.1.2-.2.3-.3.4-.1.2-.3.3-.4.5-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.7-.1.2-.2.7-.8.9-1.1.2-.3.4-.2.6-.1.2.1 1.6.7 1.8.9.2.1.4.2.4.3.1.4.1.8-.1 1.2-.2.5-1.2 1.1-1.8 1.2-.5.1-1 .2-3.2-.7-2.7-1.1-4.5-3.8-4.6-4-.1-.2-1-1.3-1-2.6.1-1.2.7-1.8.9-2.1Z" fill="#fff"/></svg>
+        </div>
+        <span class="soc-label">واتساپ</span>
+      </a>
+
+      <a class="soc web" href="https://4edit.ir" target="_blank" rel="noopener">
+        <div class="soc-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#e8b85c" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 3c-2.5 3-4 5.5-4 9s1.5 6 4 9M12 3c2.5 3 4 5.5 4 9s-1.5 6-4 9M3 12h18"/></svg>
+        </div>
+        <span class="soc-label">4edit.ir</span>
+      </a>
+
+      <a class="soc em" href="mailto:lhadirahimil@gmail.com">
+        <div class="soc-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></svg>
+        </div>
+        <span class="soc-label">ایمیل</span>
+      </a>
+
     </div>
   </section>
 
-  <!-- PORTFOLIO -->
+  <!-- PORTFOLIO — REDESIGNED -->
   <section class="portfolio reveal" id="portfolio">
-    <span class="section-label">نمونه‌کارها</span>
-    <p class="section-sub">نمونه‌ای از پروژه‌هایی که افتخار همکاری توشون رو داشتم</p>
+
+    <!-- New Portfolio Header -->
+    <div class="portfolio-header">
+      <span class="portfolio-eyebrow">Selected Works</span>
+      <h2 class="portfolio-title">نمونه‌ <span class="highlight">کارها</span></h2>
+      <p class="portfolio-subtitle">پروژه‌هایی که افتخار همکاری توشون رو داشتم — از ریلز برندی تا کمپین کامل</p>
+      <div class="portfolio-header-line"></div>
+    </div>
+
     <div class="portfolio-grid" id="portfolio-grid">
+
       <div class="work-card">
         <div class="thumb">
+          <span class="cat-tag">خودرو</span>
           <img src="images/work-1.png" alt="AM Star" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="placeholder-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f1ea" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="9" r="1.6" fill="#f5f1ea" stroke="none"/><path d="m4 17 5-5 3 3 4-5 4 5"/></svg></div>
         </div>
-        <div class="label">AM Star</div>
-        <div class="desc">تدوین ریلز و محتوای سوشال مدیا برای برند خودرویی AM Star با همکاری بازیگر محبوب تلویزیونی آقای مجید شهریاری</div>
+        <div class="card-info">
+          <div class="label">AM Star</div>
+          <div class="desc">ریلز و سوشال مدیا با همکاری مجید شهریاری</div>
+        </div>
       </div>
+
       <div class="work-card">
         <div class="thumb">
+          <span class="cat-tag">فود</span>
           <img src="images/work-2.png" alt="یخینو" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="placeholder-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f1ea" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="9" r="1.6" fill="#f5f1ea" stroke="none"/><path d="m4 17 5-5 3 3 4-5 4 5"/></svg></div>
         </div>
-        <div class="label">یخینو</div>
-        <div class="desc">تولید محتوای تبلیغاتی و ریلز برای برند بستنی خشک یخینو با همکاری یوتیوبر محبوب و مطرح ایران اقای amiram SD</div>
+        <div class="card-info">
+          <div class="label">یخینو</div>
+          <div class="desc">محتوای تبلیغاتی با همکاری amiram SD</div>
+        </div>
       </div>
+
       <div class="work-card">
         <div class="thumb">
+          <span class="cat-tag">آفرود</span>
           <img src="images/work-3.png" alt="سیمرغ آفرود" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="placeholder-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f1ea" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="9" r="1.6" fill="#f5f1ea" stroke="none"/><path d="m4 17 5-5 3 3 4-5 4 5"/></svg></div>
         </div>
-        <div class="label">سیمرغ آفرود</div>
-        <div class="desc">تولید محتوا سوشال مدیا برای پیج فروش تجهیزات آفرودی</div>
+        <div class="card-info">
+          <div class="label">سیمرغ آفرود</div>
+          <div class="desc">سوشال مدیا برای تجهیزات آفرودی</div>
+        </div>
       </div>
+
       <div class="work-card">
         <div class="thumb">
+          <span class="cat-tag">خودرو</span>
           <img src="images/work-4.png" alt="تهران صندلی" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="placeholder-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f1ea" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="9" r="1.6" fill="#f5f1ea" stroke="none"/><path d="m4 17 5-5 3 3 4-5 4 5"/></svg></div>
         </div>
-        <div class="label">تهران صندلی</div>
-        <div class="desc">تدوین ویدیوهای اورهال خودرو و فروش صندلی خودرو</div>
+        <div class="card-info">
+          <div class="label">تهران صندلی</div>
+          <div class="desc">تدوین ویدیوهای اورهال و فروش صندلی</div>
+        </div>
       </div>
+
       <div class="work-card">
         <div class="thumb">
+          <span class="cat-tag">مکانیک</span>
           <img src="images/work-5.png" alt="همتی اوکی" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="placeholder-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f1ea" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="9" r="1.6" fill="#f5f1ea" stroke="none"/><path d="m4 17 5-5 3 3 4-5 4 5"/></svg></div>
         </div>
-        <div class="label">همتی اوکی</div>
-        <div class="desc"> تولید محتوای ریلز پیج مکانیکی خودرو با سبک جدید هایلایت قسمت های مورد نظر</div>
+        <div class="card-info">
+          <div class="label">همتی اوکی</div>
+          <div class="desc">ریلز مکانیکی با سبک هایلایت جدید</div>
+        </div>
       </div>
+
       <div class="work-card">
         <div class="thumb">
+          <span class="cat-tag">ورزش</span>
           <img src="images/work-6.png" alt="الو ورزش" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="placeholder-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f1ea" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="9" r="1.6" fill="#f5f1ea" stroke="none"/><path d="m4 17 5-5 3 3 4-5 4 5"/></svg></div>
         </div>
-        <div class="label">الو ورزش</div>
-        <div class="desc">استراتژی محتوا و تدوین ریلزهای ترند برای برند الوورزش رزرو سالن ورزشی</div>
+        <div class="card-info">
+          <div class="label">الو ورزش</div>
+          <div class="desc">استراتژی محتوا و ریلزهای ترند</div>
+        </div>
       </div>
+
       <div class="work-card">
         <div class="thumb">
+          <span class="cat-tag">خودرو</span>
           <img src="images/work-7.png" alt="تهران صندلی" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="placeholder-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f1ea" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="9" r="1.6" fill="#f5f1ea" stroke="none"/><path d="m4 17 5-5 3 3 4-5 4 5"/></svg></div>
         </div>
-        <div class="label">تهران صندلی</div>
-        <div class="desc">استراتژی محتوا و تدوین ریلزهای ترند برای برند تهران صندلی خدمات اورهال خودرو</div>
+        <div class="card-info">
+          <div class="label">تهران صندلی</div>
+          <div class="desc">ریلزهای ترند اورهال خودرو</div>
+        </div>
       </div>
+
       <div class="work-card">
         <div class="thumb">
-          <img src="images/work-8.png" alt="اکستنشن تهرانی" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <span class="cat-tag">خودرو</span>
+          <img src="images/work-8.png" alt="تهران صندلی" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="placeholder-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f1ea" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="9" r="1.6" fill="#f5f1ea" stroke="none"/><path d="m4 17 5-5 3 3 4-5 4 5"/></svg></div>
         </div>
-        <div class="label">تهران صندلی</div>
-        <div class="desc">استراتژی محتوا و تدوین ریلزهای ترند برای برند تهران صندلی خدمات اورهال خودرو با همکاری آقای سیروس سکاکی (قلمبه)</div>
+        <div class="card-info">
+          <div class="label">تهران صندلی</div>
+          <div class="desc">با همکاری سیروس سکاکی (قلمبه)</div>
+        </div>
       </div>
+
       <div class="work-card">
         <div class="thumb">
-          <img src="images/work-9.png" alt="اکستنشن تهرانی" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <span class="cat-tag">خودرو</span>
+          <img src="images/work-9.png" alt="تهران صندلی" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="placeholder-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f1ea" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="9" r="1.6" fill="#f5f1ea" stroke="none"/><path d="m4 17 5-5 3 3 4-5 4 5"/></svg></div>
         </div>
-        <div class="label">تهران صندلی</div>
-        <div class="desc">تدوین ویدیوهای اورهال خودرو و فروش صندلی خودرو با همکاری بازیگر محبوب اقای سیروس همتی </div>
+        <div class="card-info">
+          <div class="label">تهران صندلی</div>
+          <div class="desc">با همکاری بازیگر سیروس همتی</div>
+        </div>
       </div>
+
       <div class="work-card">
         <div class="thumb">
-          <img src="images/work-10.png" alt="اکستنشن تهرانی" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <span class="cat-tag">خودرو</span>
+          <img src="images/work-10.png" alt="تهران صندلی" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="placeholder-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f1ea" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="9" r="1.6" fill="#f5f1ea" stroke="none"/><path d="m4 17 5-5 3 3 4-5 4 5"/></svg></div>
         </div>
-        <div class="label">تهران صندلی</div>
-        <div class="desc">تدوین ویدیوهای اورهال خودرو و فروش صندلی خودرو با همکاری بلاگر محبوب آقای متین امینی </div>
+        <div class="card-info">
+          <div class="label">تهران صندلی</div>
+          <div class="desc">با همکاری بلاگر متین امینی</div>
+        </div>
       </div>
+
       <div class="work-card">
         <div class="thumb">
-          <img src="images/work-11.png" alt="Am Star" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <span class="cat-tag">خودرو</span>
+          <img src="images/work-11.png" alt="AmStar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="placeholder-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f1ea" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="9" r="1.6" fill="#f5f1ea" stroke="none"/><path d="m4 17 5-5 3 3 4-5 4 5"/></svg></div>
         </div>
-        <div class="label">AmStar</div>
-        <div class="desc">استراتژی محتوا و تدوین ریلزهای ترند برای برند خدمات خودرویی با همکاری بازیگر محبوب تلویزیونی اقای مجید شهریاری</div>
+        <div class="card-info">
+          <div class="label">AmStar</div>
+          <div class="desc">ریلزهای ترند خدمات خودرویی</div>
+        </div>
       </div>
+
       <div class="work-card">
         <div class="thumb">
-          <img src="images/work-12.png" alt="اکستنشن تهرانی" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <span class="cat-tag">مکانیک</span>
+          <img src="images/work-12.png" alt="همتی اوکی" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="placeholder-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f1ea" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="9" r="1.6" fill="#f5f1ea" stroke="none"/><path d="m4 17 5-5 3 3 4-5 4 5"/></svg></div>
         </div>
-        <div class="label">همتی اوکی</div>
-        <div class="desc">استراتژی محتوا و تدوین ریلزهای ترند برای برند مکانیک خودرو</div>
+        <div class="card-info">
+          <div class="label">همتی اوکی</div>
+          <div class="desc">استراتژی و ریلزهای ترند مکانیک</div>
+        </div>
       </div>
+
       <div class="work-card">
         <div class="thumb">
+          <span class="cat-tag">کمدی</span>
           <img src="images/work-13.png" alt="mrdigakine" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="placeholder-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f1ea" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="9" r="1.6" fill="#f5f1ea" stroke="none"/><path d="m4 17 5-5 3 3 4-5 4 5"/></svg></div>
         </div>
-        <div class="label">mrdigakine</div>
-        <div class="desc">استراتژی محتوا و تدوین ریلزهای ترند  با همکاری واینر معروف اقای حسین قاسمی</div>
+        <div class="card-info">
+          <div class="label">mrdigakine</div>
+          <div class="desc">با همکاری واینر حسین قاسمی</div>
+        </div>
       </div>
+
       <div class="work-card">
         <div class="thumb">
-          <img src="images/work-14.png" alt="پیج رژیم و لاغری" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <span class="cat-tag">سلامت</span>
+          <img src="images/work-14.png" alt="رژیم و لاغری" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="placeholder-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f1ea" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="9" r="1.6" fill="#f5f1ea" stroke="none"/><path d="m4 17 5-5 3 3 4-5 4 5"/></svg></div>
         </div>
-        <div class="label">پیج رژیم و لاغری</div>
-        <div class="desc">استراتژی محتوا و تدوین ریلزهای ترند برای پیج رژیم و لاغری</div>
+        <div class="card-info">
+          <div class="label">رژیم و لاغری</div>
+          <div class="desc">استراتژی محتوا و ریلزهای ترند</div>
+        </div>
       </div>
+
       <div class="work-card">
         <div class="thumb">
-          <img src="images/work-15.png" alt="اکستنشن تهرانی" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <span class="cat-tag">لجستیک</span>
+          <img src="images/work-15.png" alt="حمل بار ۱۷۱۷" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="placeholder-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f1ea" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="9" r="1.6" fill="#f5f1ea" stroke="none"/><path d="m4 17 5-5 3 3 4-5 4 5"/></svg></div>
         </div>
-        <div class="label">پیج حمل بار ۱۷۱۷</div>
-        <div class="desc">استراتژی محتوا و تدوین ریلزهای ترند برای برند باربری ۱۷۱۷ با هوشمصنوعی</div>
+        <div class="card-info">
+          <div class="label">باربری ۱۷۱۷</div>
+          <div class="desc">ریلزهای ترند با هوش مصنوعی</div>
+        </div>
       </div>
+
       <div class="work-card">
         <div class="thumb">
-          <img src="images/work-16.png" alt="اکستنشن تهرانی" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <span class="cat-tag">پزشکی</span>
+          <img src="images/work-16.png" alt="تادنا هلث" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="placeholder-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f1ea" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="9" r="1.6" fill="#f5f1ea" stroke="none"/><path d="m4 17 5-5 3 3 4-5 4 5"/></svg></div>
         </div>
-        <div class="label">پیج پزشکی تادنا هلث</div>
-        <div class="desc">استراتژی محتوا و تدوین ریلزهای ترند برای برند پزشکی تادنا با همکاری مجری تلویزیونی محبوب اقای فیروزی</div>
+        <div class="card-info">
+          <div class="label">تادنا هلث</div>
+          <div class="desc">با همکاری مجری فیروزی</div>
+        </div>
       </div>
+
       <div class="work-card">
         <div class="thumb">
-          <img src="images/work-17.png" alt="رسانه پزشکی تادنا هلث" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <span class="cat-tag">پزشکی</span>
+          <img src="images/work-17.png" alt="تادنا هلث" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="placeholder-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f1ea" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="9" r="1.6" fill="#f5f1ea" stroke="none"/><path d="m4 17 5-5 3 3 4-5 4 5"/></svg></div>
         </div>
-        <div class="label">پیج پزشکی تادنا هلث</div>
-        <div class="desc">استراتژی محتوا و تدوین ریلزهای ترند برای برند پزشکی تادنا با همکاری مجری تلویزیونی محبوب اقای فیروزی</div>
+        <div class="card-info">
+          <div class="label">تادنا هلث</div>
+          <div class="desc">ریلزهای پزشکی ترند</div>
+        </div>
       </div>
+
       <div class="work-card">
         <div class="thumb">
-          <img src="images/work-18.png" alt="رسانه پزشکی تادنا هلث" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <span class="cat-tag">پزشکی</span>
+          <img src="images/work-18.png" alt="تادنا هلث" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="placeholder-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f1ea" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="9" r="1.6" fill="#f5f1ea" stroke="none"/><path d="m4 17 5-5 3 3 4-5 4 5"/></svg></div>
         </div>
-        <div class="label">پیج پزشکی تادنا هلث</div>
-        <div class="desc">استراتژی محتوا و تدوین ریلزهای ترند برای برند پزشکی تادنا با همکاری مجری تلویزیونی محبوب اقای فیروزی</div>
+        <div class="card-info">
+          <div class="label">تادنا هلث</div>
+          <div class="desc">استراتژی محتوا پزشکی</div>
+        </div>
       </div>
+
       <div class="work-card">
         <div class="thumb">
-          <img src="images/work-19.png" alt="پیج پزشکی تادنا هلث" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <span class="cat-tag">پزشکی</span>
+          <img src="images/work-19.png" alt="تادنا هلث" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="placeholder-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f1ea" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="9" r="1.6" fill="#f5f1ea" stroke="none"/><path d="m4 17 5-5 3 3 4-5 4 5"/></svg></div>
         </div>
-        <div class="label">پیج پزشکی تادنا هلث</div>
-        <div class="desc">استراتژی محتوا و تدوین ریلزهای ترند برای برند پزشکی تادنا</div>
+        <div class="card-info">
+          <div class="label">تادنا هلث</div>
+          <div class="desc">ریلزهای برند پزشکی</div>
+        </div>
       </div>
+
       <div class="work-card">
         <div class="thumb">
-          <img src="images/work-20.png" alt="پیج داروخانه دارولند" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <span class="cat-tag">داروخانه</span>
+          <img src="images/work-20.png" alt="دارولند" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="placeholder-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f1ea" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="9" r="1.6" fill="#f5f1ea" stroke="none"/><path d="m4 17 5-5 3 3 4-5 4 5"/></svg></div>
         </div>
-        <div class="label">پیج داروخانه دارولند</div>
-        <div class="desc">استراتژی محتوا و تدوین ریلزهای ترند برای برند دارولند</div>
+        <div class="card-info">
+          <div class="label">دارولند</div>
+          <div class="desc">ریلزهای ترند داروخانه</div>
+        </div>
       </div>
+
       <div class="work-card">
         <div class="thumb">
-          <img src="images/work-21.png" alt="رسانه پزشکی تادنا هلث" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <span class="cat-tag">پزشکی</span>
+          <img src="images/work-21.png" alt="تادنا هلث" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="placeholder-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f1ea" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="9" r="1.6" fill="#f5f1ea" stroke="none"/><path d="m4 17 5-5 3 3 4-5 4 5"/></svg></div>
         </div>
-        <div class="label">رسانه پزشکی تادنا هلث</div>
-        <div class="desc">استراتژی محتوا و تدوین ریلزهای ترند برای برند پزشکی تادنا هلث</div>
+        <div class="card-info">
+          <div class="label">رسانه تادنا هلث</div>
+          <div class="desc">محتوای ترند برند پزشکی</div>
+        </div>
       </div>
+
       <div class="work-card">
         <div class="thumb">
-          <img src="images/work-22.png" alt="مبلمان آرشاویر" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <span class="cat-tag">مبلمان</span>
+          <img src="images/work-22.png" alt="آرشاویر" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="placeholder-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f1ea" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="9" r="1.6" fill="#f5f1ea" stroke="none"/><path d="m4 17 5-5 3 3 4-5 4 5"/></svg></div>
         </div>
-        <div class="label">مبلمان آرشاویر</div>
-        <div class="desc">استراتژی محتوا و تدوین ریلزهای ترند برای برند مبلمان آرشاویر با همکاری بازیگر تلویزیونی محبوب آقای مجید شهریاری</div>
+        <div class="card-info">
+          <div class="label">مبلمان آرشاویر</div>
+          <div class="desc">با همکاری مجید شهریاری</div>
+        </div>
       </div>
+
       <div class="work-card">
         <div class="thumb">
+          <span class="cat-tag">زیبایی</span>
           <img src="images/work-23.png" alt="اکستنشن تهرانی" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="placeholder-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f1ea" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="9" r="1.6" fill="#f5f1ea" stroke="none"/><path d="m4 17 5-5 3 3 4-5 4 5"/></svg></div>
         </div>
-        <div class="label">اکستنشن تهرانی</div>
-        <div class="desc">استراتژی محتوا و تدوین ریلزهای ترند برای بزرگ ترین پیج اکستنشن ، اکستنشن تهرانی</div>
+        <div class="card-info">
+          <div class="label">اکستنشن تهرانی</div>
+          <div class="desc">بزرگ‌ترین پیج اکستنشن ایران</div>
+        </div>
       </div>
+
     </div>
   </section>
 
@@ -780,20 +1055,14 @@ const io = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) {
       e.target.classList.add('in');
-      if (e.target.id === 'chip-row') {
-        e.target.classList.add('stagger-in');
-      }
-      if (e.target.id === 'portfolio-grid') {
-        e.target.classList.add('stagger-in');
-      }
+      if (e.target.id === 'chip-row') e.target.classList.add('stagger-in');
+      if (e.target.id === 'portfolio-grid') e.target.classList.add('stagger-in');
       io.unobserve(e.target);
     }
   });
-}, { threshold: 0.1 });
+}, { threshold: 0.08 });
 
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-/* also observe chip-row and portfolio-grid directly */
 const chipRow = document.getElementById('chip-row');
 const pgrid = document.getElementById('portfolio-grid');
 if (chipRow) io.observe(chipRow);
